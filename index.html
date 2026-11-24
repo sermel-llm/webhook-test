@@ -1,3 +1,216 @@
-<!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><title>webhook-test</title></head>
-<body><h1>webhook-test</h1></body></html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Мельников Сергей — электроника, электромонтаж, пусконаладка</title>
+<meta name="description" content="Инженер по пусконаладке и испытаниям. Диагностика и ремонт электроники, монтаж РЭА, электромонтаж, сборка электрощитов, сопровождение пусконаладки.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f6f9; --card: #fff; --line: #e2e6ec; --text: #15202e; --muted: #5b6575; --dim: #a3abb8;
+    --accent: #1f4fa3; --accent-2: #2f6fd6; --soft: rgba(31,79,163,.08); --ring: rgba(31,79,163,.35);
+    --amber: #e8a20c;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.55 Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 56px 0; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 1px 2px rgba(16,24,40,.04); }
+  h2 { font-size: 28px; letter-spacing: -.015em; margin: 0 0 6px; text-align: center; }
+  .lead { color: var(--muted); text-align: center; margin: 0 auto 32px; max-width: 560px; }
+
+  /* Header */
+  header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.88); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; }
+  .logo-mark { width: 38px; height: 38px; border-radius: 11px; background: var(--accent); display: grid; place-items: center; }
+  .logo-mark svg { width: 22px; height: 22px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .logo small { display: block; color: var(--muted); font-weight: 400; font-size: 12.5px; line-height: 1.2; }
+  .contacts { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+  .pill { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line);
+    background: var(--card); text-decoration: none; font-size: 14px; font-weight: 500; white-space: nowrap;
+    transition: background-color .2s, border-color .2s, color .2s; }
+  .pill svg { width: 16px; height: 16px; fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .pill:hover, .pill:focus-visible { background: var(--soft); border-color: var(--ring); color: var(--accent); outline: none; }
+  .pill:hover svg { stroke: var(--accent); }
+  .pill.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .pill.primary svg { stroke: #fff; }
+  .pill.primary:hover { background: var(--accent-2); color: #fff; }
+  @media (max-width: 760px) { .contacts .hide-sm { display: none; } .logo small { display: none; } }
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: 380px 1fr; gap: 40px; align-items: center; padding: 36px; }
+  .photo { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 20px; display: block; }
+  .tag { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); background: var(--soft); border-radius: 999px;
+    padding: 5px 12px; font-size: 13px; font-weight: 600; }
+  .tag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #16a34a; }
+  h1 { font-size: 34px; line-height: 1.15; letter-spacing: -.02em; margin: 14px 0 6px; }
+  .role { color: var(--muted); font-size: 17px; margin: 0 0 18px; }
+  .about { margin: 0 0 22px; color: #2c3444; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 22px; }
+  .stat { background: var(--bg); border-radius: 14px; padding: 12px 14px; }
+  .stat b { display: block; font-size: 22px; letter-spacing: -.01em; }
+  .stat span { color: var(--muted); font-size: 12.5px; line-height: 1.3; display: block; }
+  .h-label { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 8px; }
+  .exp { list-style: none; margin: 0 0 20px; padding: 0; display: grid; gap: 6px; }
+  .exp li { display: flex; justify-content: space-between; gap: 12px; font-size: 14.5px; border-bottom: 1px dashed var(--line); padding-bottom: 6px; }
+  .exp li span { color: var(--muted); white-space: nowrap; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { background: var(--soft); color: var(--accent); border-radius: 9px; padding: 5px 11px; font-size: 13.5px; font-weight: 500; }
+  @media (max-width: 880px) {
+    .hero { grid-template-columns: 1fr; padding: 22px; gap: 24px; }
+    .photo { max-width: 360px; margin: 0 auto; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    h1 { font-size: 28px; }
+  }
+
+  /* Services */
+  .services { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+  .svc { padding: 24px; display: flex; flex-direction: column; gap: 14px; transition: transform .2s, box-shadow .2s, border-color .2s; }
+  .svc:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(16,24,40,.08); border-color: var(--ring); }
+  .svc-ico { width: 64px; height: 64px; border-radius: 50%; background: var(--soft); display: grid; place-items: center; }
+  .svc-ico svg { width: 32px; height: 32px; fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .svc-ico svg .hl { stroke: var(--amber); }
+  .svc h3 { margin: 0; font-size: 17px; line-height: 1.3; }
+  .svc p { margin: 0; color: var(--muted); font-size: 14.5px; }
+
+  /* Form */
+  .form-card { max-width: 720px; margin: 0 auto; padding: 32px; }
+  .form-slot { min-height: 420px; display: flex; justify-content: center; }
+  .form-alt { text-align: center; color: var(--muted); font-size: 14px; margin-top: 16px; }
+  .form-alt a { color: var(--accent); font-weight: 500; }
+
+  footer { border-top: 1px solid var(--line); background: var(--card); padding: 22px 0; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="На главную">
+      <span class="logo-mark"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>
+      <span>Сергей Мельников<small>Электроника · Электромонтаж · ПНР</small></span>
+    </a>
+    <nav class="contacts">
+      <a class="pill" href="tel:+79175523439"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>+7 917 552-34-39</a>
+      <a class="pill hide-sm" href="mailto:melnikov.partner@gmail.com"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>melnikov.partner@gmail.com</a>
+      <a class="pill primary" href="#form"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Оставить заявку</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section>
+    <div class="wrap">
+      <div class="card hero">
+        <img class="photo" src="avatar.jpg" alt="Мельников Сергей Андреевич на производстве" width="800" height="800">
+        <div>
+          <span class="tag">Принимаю заказы · г. Зеленоград и Москва</span>
+          <h1>Мельников Сергей Андреевич</h1>
+          <p class="role">Инженер по пусконаладке и испытаниям</p>
+          <p class="about">Прошёл путь в промышленности от оператора автоматических линий до инженера: эксплуатация, наладка, диагностика, ремонт и ИТ-сопровождение оборудования. Делаю работу хорошо, а потом ещё лучше, и отвечаю за результат перед заказчиком.</p>
+
+          <div class="stats">
+            <div class="stat"><b>6+ лет</b><span>в промышленности</span></div>
+            <div class="stat"><b>150+</b><span>единиц оборудования на поддержке</span></div>
+            <div class="stat"><b>90+</b><span>серверов Dell PowerEdge в ремонте</span></div>
+            <div class="stat"><b>98,5%</b><span>выход годных на линиях</span></div>
+          </div>
+
+          <p class="h-label">Опыт</p>
+          <ul class="exp">
+            <li>АО «НИИТМ» — инженер по ПНР и испытаниям <span>2024 — н.в.</span></li>
+            <li>ООО «ССТ» — специалист по ИТ, силовая электроника <span>2022 — 2024</span></li>
+            <li>АО «Микрон» — монтажник РЭА, техник, инженер <span>2020 — 2024</span></li>
+          </ul>
+
+          <p class="h-label">Навыки</p>
+          <div class="chips">
+            <span class="chip">Компонентный ремонт плат</span>
+            <span class="chip">Пайка SMD от 0402, QFN</span>
+            <span class="chip">Пусконаладка и испытания</span>
+            <span class="chip">Наладка автоматических линий</span>
+            <span class="chip">ППР оборудования</span>
+            <span class="chip">Серверы и ИТ-инфраструктура</span>
+            <span class="chip">СКС</span>
+            <span class="chip">STM32</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" style="padding-top:8px">
+    <div class="wrap">
+      <h2>Услуги</h2>
+      <p class="lead">Работаю по вашему проекту или помогаю довести его до рабочего состояния</p>
+      <div class="services">
+        <article class="card svc">
+          <div class="svc-ico"><svg viewBox="0 0 32 32"><rect x="5" y="7" width="22" height="18" rx="2"/><path d="M9 7V4M14 7V4M18 7V4M23 7V4M9 28v-3M14 28v-3M18 28v-3M23 28v-3"/><circle cx="13" cy="15" r="3.5" class="hl"/><path d="m15.5 17.5 4 4" class="hl"/></svg></div>
+          <h3>Диагностика и ремонт электронных устройств и приборов</h3>
+          <p>Поиск неисправности до компонента, модульный и компонентный ремонт плат, замена SMD и QFN.</p>
+        </article>
+        <article class="card svc">
+          <div class="svc-ico"><svg viewBox="0 0 32 32"><rect x="4" y="9" width="24" height="16" rx="2"/><rect x="12" y="13" width="7" height="7" rx="1"/><path d="M8 13h1M8 17h1M8 21h1M23 13h1M23 17h1M23 21h1"/><path d="M22 3l-4 6M26 5l-4 4" class="hl"/></svg></div>
+          <h3>Промышленный монтаж РЭА и приборов по вашему проекту</h3>
+          <p>Поверхностный и выводной монтаж, сборка модулей и приборов по КД заказчика.</p>
+        </article>
+        <article class="card svc">
+          <div class="svc-ico"><svg viewBox="0 0 32 32"><path d="M4 26c5 0 5-8 10-8s5 8 10 8"/><path d="M4 20c4 0 4-6 8-6"/><rect x="20" y="4" width="8" height="10" rx="1.5"/><path d="M22 14v4M26 14v4M23 7h2" class="hl"/></svg></div>
+          <h3>Промышленный электромонтаж по вашему проекту</h3>
+          <p>Прокладка и расключение кабельных линий, подключение оборудования, маркировка.</p>
+        </article>
+        <article class="card svc">
+          <div class="svc-ico"><svg viewBox="0 0 32 32"><rect x="6" y="3" width="20" height="26" rx="2"/><path d="M10 9h12M10 15h12M10 21h12"/><path d="M13 7v4M17 13v4M20 19v4" class="hl"/></svg></div>
+          <h3>Сборка электрощитов по вашему проекту</h3>
+          <p>Комплектация, сборка и проверка щитов управления и распределения по схеме.</p>
+        </article>
+        <article class="card svc">
+          <div class="svc-ico"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="5"/><path d="M16 3v4M16 25v4M3 16h4M25 16h4M6.8 6.8l2.8 2.8M22.4 22.4l2.8 2.8M6.8 25.2l2.8-2.8M22.4 9.6l2.8-2.8"/><path d="m13.8 16 1.6 1.6 3-3.2" class="hl"/></svg></div>
+          <h3>Техническое сопровождение пусконаладки оборудования</h3>
+          <p>Проверка монтажа, первый запуск, испытания, наладка режимов и передача в эксплуатацию.</p>
+        </article>
+        <article class="card svc">
+          <div class="svc-ico"><svg viewBox="0 0 32 32"><rect x="4" y="5" width="24" height="7" rx="1.5"/><rect x="4" y="15" width="24" height="7" rx="1.5"/><path d="M8 8.5h.01M8 18.5h.01M12 8.5h6M12 18.5h6"/><path d="M10 26h12M16 22v4" class="hl"/></svg></div>
+          <h3>Диагностика и ремонт серверов и ИТ-оборудования</h3>
+          <p>Модульный ремонт серверов, ПК и оргтехники, восстановление работоспособности ИТ-части станков.</p>
+        </article>
+        <article class="card svc">
+          <div class="svc-ico"><svg viewBox="0 0 32 32"><rect x="5" y="6" width="22" height="22" rx="2"/><path d="M5 12h22M11 3v6M21 3v6"/><path d="m11 20 3 3 7-7" class="hl"/></svg></div>
+          <h3>Планово-предупредительное обслуживание оборудования</h3>
+          <p>Регламентные работы, замена расходников и резервное копирование, чтобы линия не вставала.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="form" style="padding-top:8px">
+    <div class="wrap">
+      <h2>Оставить заявку</h2>
+      <p class="lead">Опишите задачу — я свяжусь с вами, уточню детали и назову сроки и стоимость</p>
+      <div class="card form-card">
+        <div class="form-slot">
+          <script>!function(a,m,o,c,r,m){a[o+c]=a[o+c]||{setMeta:function(p){this.params=(this.params||[]).concat([p])}},a[o+r]=a[o+r]||function(f){a[o+r].f=(a[o+r].f||[]).concat([f])},a[o+r]({id:"1761478",hash:"68d3231d466ac7893e1ec4d4f2e8cf31",locale:"ru"}),a[o+m]=a[o+m]||function(f,k){a[o+m].f=(a[o+m].f||[]).concat([[f,k]])}}(window,0,"amo_forms_","params","load","loaded");</script><script id="amoforms_script_1761478" async="async" charset="utf-8" src="https://forms.amo-forms.ru/forms/assets/js/amoforms.js?1795520270"></script>
+        </div>
+        <p class="form-alt">Удобнее напрямую? Звоните <a href="tel:+79175523439">+7 917 552-34-39</a> или пишите на <a href="mailto:melnikov.partner@gmail.com">melnikov.partner@gmail.com</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Мельников Сергей Андреевич</span>
+    <span>Электроника · Электромонтаж · Пусконаладка</span>
+  </div>
+</footer>
+
+</body>
+</html>
