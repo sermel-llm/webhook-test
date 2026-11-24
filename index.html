@@ -8,86 +8,115 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* Палитра — светлая («деловая») тема resume-site */
   :root {
-    --bg: #f4f6f9; --card: #fff; --line: #e2e6ec; --text: #15202e; --muted: #5b6575; --dim: #a3abb8;
-    --accent: #1f4fa3; --accent-2: #2f6fd6; --soft: rgba(31,79,163,.08); --ring: rgba(31,79,163,.35);
-    --amber: #e8a20c;
+    --bg: #f3f4f7; --card: #ffffff; --row: #ffffff; --line: #e2e5eb;
+    --text: #16202e; --muted: #5d6677; --dim: #a4abb8;
+    --green: #1f4fa3; --soft: rgba(31,79,163,.09); --ring: rgba(31,79,163,.40);
+    --p: #2c3444; --li: #2c3444; --badge: #eef1f6;
+    --l4: #1f4fa3; --l4t: #fff; --l3: #4a74c4; --l3t: #fff; --l2: #a9c0e8; --l2t: #12244a; --l1: #dde6f5; --l1t: #1f3360;
+    --blue: #2aa8e0; --violet: #8b5cf6; --amber: #f5b014; --pink: #f0386b; --orange: #ff7a1a;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; }
   body { margin: 0; background: var(--bg); color: var(--text);
-    font: 16px/1.55 Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+         font: 15px/1.55 Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
   a { color: inherit; }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
-  section { padding: 56px 0; }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 1px 2px rgba(16,24,40,.04); }
-  h2 { font-size: 28px; letter-spacing: -.015em; margin: 0 0 6px; text-align: center; }
-  .lead { color: var(--muted); text-align: center; margin: 0 auto 32px; max-width: 560px; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 16px; }
 
-  /* Header */
-  header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.88); backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line); }
-  .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
-  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; }
-  .logo-mark { width: 38px; height: 38px; border-radius: 11px; background: var(--accent); display: grid; place-items: center; }
-  .logo-mark svg { width: 22px; height: 22px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-  .logo small { display: block; color: var(--muted); font-weight: 400; font-size: 12.5px; line-height: 1.2; }
-  .contacts { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-  .pill { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line);
-    background: var(--card); text-decoration: none; font-size: 14px; font-weight: 500; white-space: nowrap;
-    transition: background-color .2s, border-color .2s, color .2s; }
-  .pill svg { width: 16px; height: 16px; fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-  .pill:hover, .pill:focus-visible { background: var(--soft); border-color: var(--ring); color: var(--accent); outline: none; }
-  .pill:hover svg { stroke: var(--accent); }
-  .pill.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .pill.primary svg { stroke: #fff; }
-  .pill.primary:hover { background: var(--accent-2); color: #fff; }
-  @media (max-width: 760px) { .contacts .hide-sm { display: none; } .logo small { display: none; } }
+  .row, .stat, .panel, .tile { border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(16,24,40,.04); }
 
-  /* Hero */
-  .hero { display: grid; grid-template-columns: 380px 1fr; gap: 40px; align-items: center; padding: 36px; }
-  .photo { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 20px; display: block; }
-  .tag { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); background: var(--soft); border-radius: 999px;
-    padding: 5px 12px; font-size: 13px; font-weight: 600; }
-  .tag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #16a34a; }
-  h1 { font-size: 34px; line-height: 1.15; letter-spacing: -.02em; margin: 14px 0 6px; }
-  .role { color: var(--muted); font-size: 17px; margin: 0 0 18px; }
-  .about { margin: 0 0 22px; color: #2c3444; }
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 22px; }
-  .stat { background: var(--bg); border-radius: 14px; padding: 12px 14px; }
-  .stat b { display: block; font-size: 22px; letter-spacing: -.01em; }
-  .stat span { color: var(--muted); font-size: 12.5px; line-height: 1.3; display: block; }
-  .h-label { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 8px; }
-  .exp { list-style: none; margin: 0 0 20px; padding: 0; display: grid; gap: 6px; }
-  .exp li { display: flex; justify-content: space-between; gap: 12px; font-size: 14.5px; border-bottom: 1px dashed var(--line); padding-bottom: 6px; }
-  .exp li span { color: var(--muted); white-space: nowrap; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-  .chip { background: var(--soft); color: var(--accent); border-radius: 9px; padding: 5px 11px; font-size: 13.5px; font-weight: 500; }
-  @media (max-width: 880px) {
-    .hero { grid-template-columns: 1fr; padding: 22px; gap: 24px; }
-    .photo { max-width: 360px; margin: 0 auto; }
-    .stats { grid-template-columns: repeat(2, 1fr); }
-    h1 { font-size: 28px; }
-  }
+  /* Шапка */
+  header { position: sticky; top: 0; z-index: 10; background: rgba(243,244,247,.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 64px; flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-mark { width: 38px; height: 38px; border-radius: 50%; background: var(--green); display: grid; place-items: center;
+    box-shadow: 0 0 0 3px var(--bg), 0 0 0 4.5px var(--ring); }
+  .logo-mark svg { width: 19px; height: 19px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .logo b { display: block; font-weight: 600; font-size: 15px; line-height: 1.2; }
+  .logo small { display: block; color: var(--muted); font-size: 12.5px; }
 
-  /* Services */
-  .services { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
-  .svc { padding: 24px; display: flex; flex-direction: column; gap: 14px; transition: transform .2s, box-shadow .2s, border-color .2s; }
-  .svc:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(16,24,40,.08); border-color: var(--ring); }
-  .svc-ico { width: 64px; height: 64px; border-radius: 50%; background: var(--soft); display: grid; place-items: center; }
-  .svc-ico svg { width: 32px; height: 32px; fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-  .svc-ico svg .hl { stroke: var(--amber); }
-  .svc h3 { margin: 0; font-size: 17px; line-height: 1.3; }
-  .svc p { margin: 0; color: var(--muted); font-size: 14.5px; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--line);
+          border-radius: 999px; padding: 6px 12px; font-size: 13.5px; font-weight: 500; text-decoration: none; white-space: nowrap;
+          transition: background-color .3s ease, border-color .3s ease, color .3s ease, box-shadow .3s ease; }
+  .pill svg { width: 15px; height: 15px; fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: stroke .3s ease; }
+  a.pill:hover, a.pill:focus-visible { background: var(--soft); border-color: var(--ring); color: var(--green); box-shadow: 0 0 14px var(--soft); outline: none; }
+  a.pill:hover svg, a.pill:focus-visible svg { stroke: var(--green); }
+  .pill.cta { background: var(--green); border-color: var(--green); color: #fff; }
+  .pill.cta svg { stroke: #fff; }
+  .pill.cta:hover, .pill.cta:focus-visible { background: #2a5cb8; color: #fff; }
+  .pill.cta:hover svg { stroke: #fff; }
+  .contacts { display: flex; flex-wrap: wrap; gap: 6px; }
+  @media (max-width: 680px) { .hide-sm { display: none !important; } }
 
-  /* Form */
-  .form-card { max-width: 720px; margin: 0 auto; padding: 32px; }
-  .form-slot { min-height: 420px; display: flex; justify-content: center; }
-  .form-alt { text-align: center; color: var(--muted); font-size: 14px; margin-top: 16px; }
-  .form-alt a { color: var(--accent); font-weight: 500; }
+  main { padding: 36px 0 48px; }
+  section { margin-bottom: 36px; }
+  .sec-title { font-size: 17px; font-weight: 600; margin: 0 0 4px; }
+  .sec-sub { color: var(--muted); font-size: 13px; margin: 0 0 14px; }
+  .panel { background: var(--card); border-radius: 22px; padding: 22px; }
+  .panel p { margin: 0 0 10px; color: var(--p); }
 
-  footer { border-top: 1px solid var(--line); background: var(--card); padding: 22px 0; color: var(--muted); font-size: 14px; }
-  footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  /* Главный блок: фото + информация */
+  .hero { display: grid; grid-template-columns: 300px 1fr; gap: 28px; align-items: start; }
+  .photo { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 18px; display: block; }
+  h1 { margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -.01em; }
+  .sub { color: var(--muted); margin: 2px 0 14px; }
+  .open { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 12px; }
+  .open::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 8px var(--orange); }
+  @media (max-width: 760px) { .hero { grid-template-columns: 1fr; } .photo { max-width: 320px; } }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 14px 0 0; }
+  .stat { background: var(--card); border-radius: 16px; padding: 16px 16px 14px; }
+  .stat .lbl { color: var(--muted); font-size: 13px; display: flex; align-items: center; gap: 6px; }
+  .stat .lbl svg { width: 14px; height: 14px; fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .stat .val { font-size: 24px; font-weight: 600; margin: 6px 0 2px; letter-spacing: -.01em; }
+  .stat .cap { color: var(--muted); font-size: 12.5px; }
+  @media (max-width: 760px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+
+  .h-label { font-size: 14.5px; font-weight: 600; margin: 16px 0 8px; }
+  .exp { list-style: none; margin: 0; padding: 0; }
+  .exp li { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 7px 0; border-top: 1px dashed var(--line); font-size: 14px; color: var(--li); }
+  .exp li b { font-weight: 500; color: var(--text); }
+  .badge { background: var(--badge); border-radius: 999px; padding: 4px 11px; font-size: 12.5px; font-weight: 600;
+           white-space: nowrap; display: inline-flex; gap: 6px; align-items: center; color: var(--muted); }
+  .badge.now { color: var(--text); }
+  .badge.now::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 8px var(--orange); }
+  .ach { margin: 0; padding: 0; list-style: none; }
+  .ach li { position: relative; padding-left: 16px; margin: 4px 0; color: var(--li); font-size: 14px; }
+  .ach li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--dim); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { border-radius: 10px; padding: 6px 12px; font-size: 13.5px; font-weight: 500; }
+  .l4 { background: var(--l4); color: var(--l4t); } .l3 { background: var(--l3); color: var(--l3t); }
+  .l2 { background: var(--l2); color: var(--l2t); } .l1 { background: var(--l1); color: var(--l1t); }
+
+  /* Иконки — как в резюме */
+  .ico { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; }
+  .ico svg { width: 24px; height: 24px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .c-green  { background: var(--soft); } .c-green svg  { stroke: var(--green); }
+  .c-blue   { background: rgba(42,168,224,.12); } .c-blue svg   { stroke: var(--blue); }
+  .c-violet { background: rgba(139,92,246,.14); } .c-violet svg { stroke: var(--violet); }
+  .c-amber  { background: rgba(245,176,20,.14); } .c-amber svg  { stroke: #d39300; }
+  .c-pink   { background: rgba(240,56,107,.12); } .c-pink svg   { stroke: var(--pink); }
+  .c-orange { background: rgba(255,122,26,.12); } .c-orange svg { stroke: var(--orange); }
+
+  /* Услуги */
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+  .tile { background: var(--card); border-radius: 18px; padding: 16px; display: flex; gap: 14px;
+          transition: border-color .3s ease, box-shadow .3s ease; }
+  .tile:hover { border-color: var(--ring); box-shadow: 0 0 14px var(--soft); }
+  .tile h4 { margin: 2px 0 4px; font-size: 14.5px; font-weight: 600; line-height: 1.35; }
+  .tile p { margin: 0; color: var(--muted); font-size: 13.5px; }
+
+  /* Форма */
+  .form-slot { background: #fff; border-radius: 16px; min-height: 200px; }
+  .form-slot iframe { max-width: 100%; }
+  .form-foot { color: var(--muted); font-size: 13px; padding-top: 12px; }
+  .form-foot a { color: var(--green); text-decoration: none; font-weight: 500; }
+  .form-foot a:hover { text-decoration: underline; }
+
+  footer { text-align: center; color: var(--muted); font-size: 14px; padding: 0 0 40px; }
 </style>
 </head>
 <body>
@@ -96,121 +125,104 @@
   <div class="wrap nav">
     <a class="logo" href="#top" aria-label="На главную">
       <span class="logo-mark"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>
-      <span>Сергей Мельников<small>Электроника · Электромонтаж · ПНР</small></span>
+      <span><b>Сергей Мельников</b><small>Электроника · Электромонтаж · ПНР</small></span>
     </a>
-    <nav class="contacts">
+    <nav class="contacts" aria-label="Контакты">
       <a class="pill" href="tel:+79175523439"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>+7 917 552-34-39</a>
       <a class="pill hide-sm" href="mailto:melnikov.partner@gmail.com"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>melnikov.partner@gmail.com</a>
-      <a class="pill primary" href="#form"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Оставить заявку</a>
+      <a class="pill cta" href="#form"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/></svg>Оставить заявку</a>
     </nav>
   </div>
 </header>
 
-<main id="top">
+<main class="wrap" id="top">
+
   <section>
-    <div class="wrap">
-      <div class="card hero">
-        <img class="photo" src="avatar.jpg" alt="Мельников Сергей Андреевич на производстве" width="800" height="800">
-        <div>
-          <span class="tag">Принимаю заказы · г. Зеленоград и Москва</span>
-          <h1>Мельников Сергей Андреевич</h1>
-          <p class="role">Инженер по пусконаладке и испытаниям</p>
-          <p class="about">Прошёл путь в промышленности от оператора автоматических линий до инженера: эксплуатация, наладка, диагностика, ремонт и ИТ-сопровождение оборудования. Делаю работу хорошо, а потом ещё лучше, и отвечаю за результат перед заказчиком.</p>
+    <div class="panel hero">
+      <img class="photo" src="avatar.jpg" alt="Мельников Сергей Андреевич на производстве" width="800" height="800">
+      <div>
+        <span class="badge open">Принимаю заказы · Зеленоград, Москва</span>
+        <h1>Мельников Сергей Андреевич</h1>
+        <div class="sub">Инженер по пусконаладке и испытаниям</div>
+        <p>Прошёл путь в промышленности от оператора автоматических линий до инженера и видел работу оборудования с разных сторон: эксплуатацию, наладку, диагностику, ремонт и ИТ-сопровождение. Стараюсь делать работу хорошо, а потом ещё лучше.</p>
 
-          <div class="stats">
-            <div class="stat"><b>6+ лет</b><span>в промышленности</span></div>
-            <div class="stat"><b>150+</b><span>единиц оборудования на поддержке</span></div>
-            <div class="stat"><b>90+</b><span>серверов Dell PowerEdge в ремонте</span></div>
-            <div class="stat"><b>98,5%</b><span>выход годных на линиях</span></div>
-          </div>
+        <div class="h-label">Опыт</div>
+        <ul class="exp">
+          <li><span><b>АО «НИИТМ»</b> · инженер по пусконаладке и испытаниям</span><span class="badge now">сейчас</span></li>
+          <li><span><b>ООО «ССТ»</b> · специалист по ИТ, силовая электроника</span><span class="badge">2022 — 2024</span></li>
+          <li><span><b>АО «Микрон»</b> · монтажник РЭА → инженер-программист</span><span class="badge">2020 — 2024</span></li>
+        </ul>
 
-          <p class="h-label">Опыт</p>
-          <ul class="exp">
-            <li>АО «НИИТМ» — инженер по ПНР и испытаниям <span>2024 — н.в.</span></li>
-            <li>ООО «ССТ» — специалист по ИТ, силовая электроника <span>2022 — 2024</span></li>
-            <li>АО «Микрон» — монтажник РЭА, техник, инженер <span>2020 — 2024</span></li>
-          </ul>
+        <div class="h-label">Ключевые достижения</div>
+        <ul class="ach">
+          <li>Компонентный ремонт плат с нормой 250 ед. за смену, SMD от 0402, QFN, STM32 на 100 выводов</li>
+          <li>Гарантийная поддержка 90+ серверов PowerEdge R740XD: диагностика и модульный ремонт</li>
+          <li>Работа 5 линий Muhlbauer TAL10000: ~500 000 изделий за смену, выход годных от 98,5%</li>
+        </ul>
+      </div>
+    </div>
 
-          <p class="h-label">Навыки</p>
-          <div class="chips">
-            <span class="chip">Компонентный ремонт плат</span>
-            <span class="chip">Пайка SMD от 0402, QFN</span>
-            <span class="chip">Пусконаладка и испытания</span>
-            <span class="chip">Наладка автоматических линий</span>
-            <span class="chip">ППР оборудования</span>
-            <span class="chip">Серверы и ИТ-инфраструктура</span>
-            <span class="chip">СКС</span>
-            <span class="chip">STM32</span>
-          </div>
-        </div>
+    <div class="stats">
+      <div class="stat"><div class="lbl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Опыт</div><div class="val">6+ лет</div><div class="cap">в промышленности</div></div>
+      <div class="stat"><div class="lbl"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Оборудование</div><div class="val">150+</div><div class="cap">единиц на поддержке</div></div>
+      <div class="stat"><div class="lbl"><svg viewBox="0 0 24 24"><path d="M12 2c1 4 6 6 6 12a6 6 0 0 1-12 0c0-3 2-5 3-7 1 2 3 3 3 3s1-4 0-8z"/></svg>Выпуск</div><div class="val">500K</div><div class="cap">изделий за смену</div></div>
+      <div class="stat"><div class="lbl"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Выход годных</div><div class="val">98,5%</div><div class="cap">не ниже, на линиях</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="panel">
+      <h2 class="sec-title">Навыки</h2>
+      <p class="sec-sub">Цвет показывает глубину практики</p>
+      <div class="chips">
+        <span class="chip l4">Диагностика и ремонт</span>
+        <span class="chip l4">Пайка SMD / THT, QFN</span>
+        <span class="chip l4">ИТ-инфраструктура</span>
+        <span class="chip l3">Пусконаладка и испытания</span>
+        <span class="chip l3">Наладка автоматических линий</span>
+        <span class="chip l3">ППР оборудования</span>
+        <span class="chip l3">Серверы</span>
+        <span class="chip l2">СКС, обжим кабелей</span>
+        <span class="chip l1">Микроконтроллеры STM32</span>
       </div>
     </div>
   </section>
 
-  <section id="services" style="padding-top:8px">
-    <div class="wrap">
-      <h2>Услуги</h2>
-      <p class="lead">Работаю по вашему проекту или помогаю довести его до рабочего состояния</p>
-      <div class="services">
-        <article class="card svc">
-          <div class="svc-ico"><svg viewBox="0 0 32 32"><rect x="5" y="7" width="22" height="18" rx="2"/><path d="M9 7V4M14 7V4M18 7V4M23 7V4M9 28v-3M14 28v-3M18 28v-3M23 28v-3"/><circle cx="13" cy="15" r="3.5" class="hl"/><path d="m15.5 17.5 4 4" class="hl"/></svg></div>
-          <h3>Диагностика и ремонт электронных устройств и приборов</h3>
-          <p>Поиск неисправности до компонента, модульный и компонентный ремонт плат, замена SMD и QFN.</p>
-        </article>
-        <article class="card svc">
-          <div class="svc-ico"><svg viewBox="0 0 32 32"><rect x="4" y="9" width="24" height="16" rx="2"/><rect x="12" y="13" width="7" height="7" rx="1"/><path d="M8 13h1M8 17h1M8 21h1M23 13h1M23 17h1M23 21h1"/><path d="M22 3l-4 6M26 5l-4 4" class="hl"/></svg></div>
-          <h3>Промышленный монтаж РЭА и приборов по вашему проекту</h3>
-          <p>Поверхностный и выводной монтаж, сборка модулей и приборов по КД заказчика.</p>
-        </article>
-        <article class="card svc">
-          <div class="svc-ico"><svg viewBox="0 0 32 32"><path d="M4 26c5 0 5-8 10-8s5 8 10 8"/><path d="M4 20c4 0 4-6 8-6"/><rect x="20" y="4" width="8" height="10" rx="1.5"/><path d="M22 14v4M26 14v4M23 7h2" class="hl"/></svg></div>
-          <h3>Промышленный электромонтаж по вашему проекту</h3>
-          <p>Прокладка и расключение кабельных линий, подключение оборудования, маркировка.</p>
-        </article>
-        <article class="card svc">
-          <div class="svc-ico"><svg viewBox="0 0 32 32"><rect x="6" y="3" width="20" height="26" rx="2"/><path d="M10 9h12M10 15h12M10 21h12"/><path d="M13 7v4M17 13v4M20 19v4" class="hl"/></svg></div>
-          <h3>Сборка электрощитов по вашему проекту</h3>
-          <p>Комплектация, сборка и проверка щитов управления и распределения по схеме.</p>
-        </article>
-        <article class="card svc">
-          <div class="svc-ico"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="5"/><path d="M16 3v4M16 25v4M3 16h4M25 16h4M6.8 6.8l2.8 2.8M22.4 22.4l2.8 2.8M6.8 25.2l2.8-2.8M22.4 9.6l2.8-2.8"/><path d="m13.8 16 1.6 1.6 3-3.2" class="hl"/></svg></div>
-          <h3>Техническое сопровождение пусконаладки оборудования</h3>
-          <p>Проверка монтажа, первый запуск, испытания, наладка режимов и передача в эксплуатацию.</p>
-        </article>
-        <article class="card svc">
-          <div class="svc-ico"><svg viewBox="0 0 32 32"><rect x="4" y="5" width="24" height="7" rx="1.5"/><rect x="4" y="15" width="24" height="7" rx="1.5"/><path d="M8 8.5h.01M8 18.5h.01M12 8.5h6M12 18.5h6"/><path d="M10 26h12M16 22v4" class="hl"/></svg></div>
-          <h3>Диагностика и ремонт серверов и ИТ-оборудования</h3>
-          <p>Модульный ремонт серверов, ПК и оргтехники, восстановление работоспособности ИТ-части станков.</p>
-        </article>
-        <article class="card svc">
-          <div class="svc-ico"><svg viewBox="0 0 32 32"><rect x="5" y="6" width="22" height="22" rx="2"/><path d="M5 12h22M11 3v6M21 3v6"/><path d="m11 20 3 3 7-7" class="hl"/></svg></div>
-          <h3>Планово-предупредительное обслуживание оборудования</h3>
-          <p>Регламентные работы, замена расходников и резервное копирование, чтобы линия не вставала.</p>
-        </article>
-      </div>
+  <section id="services">
+    <h2 class="sec-title">Услуги</h2>
+    <p class="sec-sub">Работаю по вашему проекту или помогаю довести его до рабочего состояния</p>
+    <div class="grid">
+      <div class="tile"><div class="ico c-green"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 5V3M12 5V3M16 5V3M8 21v-2M12 21v-2M16 21v-2"/><circle cx="11" cy="11" r="2.5"/><path d="m13 13 3 3"/></svg></div>
+        <div><h4>Диагностика и ремонт электронных устройств и приборов</h4><p>Поиск неисправности до компонента, модульный и компонентный ремонт плат.</p></div></div>
+      <div class="tile"><div class="ico c-violet"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></div>
+        <div><h4>Промышленный монтаж РЭА и приборов по вашему проекту</h4><p>Поверхностный и выводной монтаж, сборка модулей и приборов по КД заказчика.</p></div></div>
+      <div class="tile"><div class="ico c-amber"><svg viewBox="0 0 24 24"><path d="M3 20c4 0 4-6 8-6s4 6 8 6"/><rect x="15" y="3" width="6" height="8" rx="1"/><path d="M17 11v3M19 11v3M3 14c3 0 3-4 6-4"/></svg></div>
+        <div><h4>Промышленный электромонтаж по вашему проекту</h4><p>Прокладка и расключение кабельных линий, подключение оборудования, маркировка.</p></div></div>
+      <div class="tile"><div class="ico c-blue"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 7h8M8 12h8M8 17h8M10 5v4M14 10v4M11 15v4"/></svg></div>
+        <div><h4>Сборка электрощитов по вашему проекту</h4><p>Комплектация, сборка и проверка щитов управления и распределения по схеме.</p></div></div>
+      <div class="tile"><div class="ico c-pink"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></div>
+        <div><h4>Техническое сопровождение пусконаладки оборудования</h4><p>Проверка монтажа, первый запуск, испытания, наладка режимов и передача в эксплуатацию.</p></div></div>
+      <div class="tile"><div class="ico c-orange"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01M11 7h5M11 17h5"/></svg></div>
+        <div><h4>Диагностика и ремонт серверов и ИТ-оборудования</h4><p>Модульный ремонт серверов, ПК и оргтехники, ИТ-часть производственных установок.</p></div></div>
+      <div class="tile"><div class="ico c-green"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg></div>
+        <div><h4>Планово-предупредительное обслуживание</h4><p>Регламентные работы, замена расходников, резервное копирование — чтобы линия не вставала.</p></div></div>
     </div>
   </section>
 
-  <section id="form" style="padding-top:8px">
-    <div class="wrap">
-      <h2>Оставить заявку</h2>
-      <p class="lead">Опишите задачу — я свяжусь с вами, уточню детали и назову сроки и стоимость</p>
-      <div class="card form-card">
-        <div class="form-slot">
-          <script>!function(a,m,o,c,r,m){a[o+c]=a[o+c]||{setMeta:function(p){this.params=(this.params||[]).concat([p])}},a[o+r]=a[o+r]||function(f){a[o+r].f=(a[o+r].f||[]).concat([f])},a[o+r]({id:"1761478",hash:"68d3231d466ac7893e1ec4d4f2e8cf31",locale:"ru"}),a[o+m]=a[o+m]||function(f,k){a[o+m].f=(a[o+m].f||[]).concat([[f,k]])}}(window,0,"amo_forms_","params","load","loaded");</script><script id="amoforms_script_1761478" async="async" charset="utf-8" src="https://forms.amo-forms.ru/forms/assets/js/amoforms.js?1795520270"></script>
-        </div>
-        <p class="form-alt">Удобнее напрямую? Звоните <a href="tel:+79175523439">+7 917 552-34-39</a> или пишите на <a href="mailto:melnikov.partner@gmail.com">melnikov.partner@gmail.com</a></p>
+  <section id="form">
+    <div class="panel">
+      <h2 class="sec-title">Оставить заявку</h2>
+      <p class="sec-sub">Опишите задачу — я свяжусь с вами, уточню детали и назову сроки и стоимость</p>
+      <div class="form-slot">
+        <script>!function(a,m,o,c,r,m){a[o+c]=a[o+c]||{setMeta:function(p){this.params=(this.params||[]).concat([p])}},a[o+r]=a[o+r]||function(f){a[o+r].f=(a[o+r].f||[]).concat([f])},a[o+r]({id:"1761478",hash:"68d3231d466ac7893e1ec4d4f2e8cf31",locale:"ru"}),a[o+m]=a[o+m]||function(f,k){a[o+m].f=(a[o+m].f||[]).concat([[f,k]])}}(window,0,"amo_forms_","params","load","loaded");</script><script id="amoforms_script_1761478" async="async" charset="utf-8" src="https://forms.amo-forms.ru/forms/assets/js/amoforms.js?1795520270"></script>
       </div>
+      <div class="form-foot">Удобнее напрямую? <a href="tel:+79175523439">+7 917 552-34-39</a> · <a href="mailto:melnikov.partner@gmail.com">melnikov.partner@gmail.com</a></div>
     </div>
   </section>
+
 </main>
 
-<footer>
-  <div class="wrap">
-    <span>© 2026 Мельников Сергей Андреевич</span>
-    <span>Электроника · Электромонтаж · Пусконаладка</span>
-  </div>
-</footer>
+<footer>Буду рад обсудить вашу задачу!</footer>
 
 </body>
 </html>
